@@ -1,8 +1,5 @@
 function Validation() {
     this.checkEmpty = function (valInput, msgErr, spanID) {
-        //valInput == ""
-        //? trim() => "   SV001   ".trim() => "SV001"
-        //? "    ".trim() => ""
 
         if (valInput.trim() == "") {
             //!không hợp lệ
@@ -17,6 +14,20 @@ function Validation() {
 
     }
 
+    this.kiemTraDoDaiTaiKhoan = function (valInput, msgErr, spanID) {
+
+        if (valInput.length >= 4 && valInput.length <= 6 ) {
+            //!không hợp lệ
+            document.getElementById(spanID).style.display = 'none';
+            document.getElementById(spanID).innerHTML = ''
+            return true
+        }
+        //?Hợp lệ
+        document.getElementById(spanID).style.display = 'block';
+        document.getElementById(spanID).innerHTML = msgErr;
+        return false
+
+    }
 
     this.kiemTraChucVu = function (selectID, msgErr, spanID) {
         var index = document.getElementById(selectID).selectedIndex;

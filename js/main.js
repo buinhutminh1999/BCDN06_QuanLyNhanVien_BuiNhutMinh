@@ -1,4 +1,4 @@
-const DSNV = new DanhSachNhanVien()
+var DSNV = new DanhSachNhanVien()
 const validation = new Validation()
 
 function getMyEle(id) {
@@ -20,8 +20,11 @@ getLocal()
 
 function themNhanVien() {
     var taiKhoan = getMyEle('tknv').value
+    taiKhoan = taiKhoan.replace(/\s/g,"")
+    console.log(taiKhoan)
     var hoTen = getMyEle('name').value
     var email = getMyEle('email').value
+    email = email.replace(/\s/g,"")
     var matKhau = getMyEle('password').value
     var ngayLam = getMyEle('datepicker').value
     var luongCB = getMyEle('luongCB').value
@@ -29,7 +32,7 @@ function themNhanVien() {
     var gioLamTrongThang = getMyEle('gioLam').value
 
     var isValid = true
-    isValid &= validation.checkEmpty(taiKhoan, 'Tài khoản không được để trống', 'tbTKNV') && validation.kiemTraID(taiKhoan, 'Mã nhân viên bị trùng', 'tbTKNV')
+    isValid &= validation.checkEmpty(taiKhoan, 'Tài khoản không được để trống', 'tbTKNV') && validation.kiemTraDoDaiTaiKhoan(taiKhoan, 'Tài khoản phải tối đa 4 đến 6 ký tự', 'tbTKNV') && validation.kiemTraID(taiKhoan, 'Mã nhân viên bị trùng', 'tbTKNV')
 
     isValid &= validation.checkEmpty(hoTen, 'Họ tên không được để trống', 'tbTen') && validation.kiemTraHoTen(hoTen, 'Họ tên không hợp lệ', 'tbTen')
 
@@ -167,4 +170,5 @@ function timKiemLoai() {
     hienThiTable(DSNV.timKiemLoaiNV(loaiNV))
 }
 
-getMyEle('btnTimNV').onkeyup = timKiemLoai
+getMyEle('searchName').onkeyup = timKiemLoai
+
